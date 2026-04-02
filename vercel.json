@@ -1,7 +1,7 @@
 {
   "rewrites": [
-    { "source": "/generate", "destination": "/api/index" },
-    { "source": "/formats",  "destination": "/api/index" },
-    { "source": "/health",   "destination": "/api/index" }
+    { "source": "/generate", "destination": "/api/app" },
+    { "source": "/formats",  "destination": "/api/app" },
+    { "source": "/health",   "destination": "/api/app" }
   ]
 }

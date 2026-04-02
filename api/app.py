@@ -22,12 +22,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = OpenAI(
-    api_key=os.environ.get("GROQ_API_KEY"),
-    base_url="https://api.groq.com/openai/v1",
-)
-
 MODEL = "llama-3.3-70b-versatile"
+
+def get_client():
+    """Lazy client init so missing API key crashes at request time, not on startup."""
+    api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="GROQ_API_KEY is not set in environment variables.")
+    return OpenAI(api_key=api_key, base_url="https://api.groq.com/openai/v1")
 
 FORMAT_INSTRUCTIONS = {
     "professional": """Generate a detailed, professional standup update in paragraph form.
@@ -202,9 +204,11 @@ async def generate_standup(request: StandupRequest):
 
     user_prompt = build_user_prompt(request.notes, request.format, request.extra_context)
 
+    groq = get_client()
+
     def stream_generator():
         try:
-            stream = client.chat.completions.create(
+            stream = groq.chat.completions.create(
                 model=MODEL,
                 messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
