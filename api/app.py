@@ -1,10 +1,13 @@
 import os
 import json
+from pathlib import Path
 from openai import OpenAI
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, HTMLResponse, Response
 from pydantic import BaseModel
+
+ROOT = Path(__file__).parent.parent
 
 # load_dotenv only for local dev — Vercel injects env vars directly
 try:
@@ -239,3 +242,17 @@ async def generate_standup(request: StandupRequest):
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+
+
+# ── Serve frontend files ──────────────────────────────────
+@app.get("/")
+async def index():
+    return HTMLResponse((ROOT / "index.html").read_text())
+
+@app.get("/style.css")
+async def css():
+    return Response((ROOT / "style.css").read_text(), media_type="text/css")
+
+@app.get("/app.js")
+async def js():
+    return Response((ROOT / "app.js").read_text(), media_type="application/javascript")
