@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Standup Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">Standup<span class="logo-accent">AI</span></span>
+        </div>
+        <div class="header-badge">AI Powered</div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+
+        <!-- Left: Input Panel -->
+        <section class="panel panel-input">
+          <div class="panel-header">
+            <h2>Your Raw Notes</h2>
+            <span class="panel-hint">Rough, messy, incomplete — that's fine</span>
+          </div>
+
+          <textarea
+            id="notes"
+            class="notes-input"
+            placeholder="worked on PDEV-21730 date filter&#10;qa deployment failing&#10;added future date validation&#10;reviewed dan comments&#10;starting new ticket tomorrow"
+            spellcheck="false"
+          ></textarea>
+
+          <div class="examples-row">
+            <span class="examples-label">Try an example:</span>
+            <div class="chips">
+              <button class="chip" data-example="daily">Daily Update</button>
+              <button class="chip" data-example="blocker">With Blocker</button>
+              <button class="chip" data-example="weekly">Weekly Notes</button>
+              <button class="chip" data-example="sprint">Sprint Review</button>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label for="extra-context">Extra context <span class="optional">(optional)</span></label>
+            <input
+              id="extra-context"
+              type="text"
+              placeholder="e.g. team name, sprint goal, project background..."
+              class="text-input"
+            />
+          </div>
+
+          <div class="format-section">
+            <div class="format-label">Output Format</div>
+            <div class="format-grid" id="format-grid">
+              <button class="format-btn" data-format="professional">
+                <span class="fmt-icon">📝</span>
+                <span class="fmt-name">Professional</span>
+              </button>
+              <button class="format-btn" data-format="short">
+                <span class="fmt-icon">⚡</span>
+                <span class="fmt-name">Quick Bullets</span>
+              </button>
+              <button class="format-btn active" data-format="slack">
+                <span class="fmt-icon">💬</span>
+                <span class="fmt-name">Slack</span>
+              </button>
+              <button class="format-btn" data-format="daily_summary">
+                <span class="fmt-icon">📊</span>
+                <span class="fmt-name">Daily Summary</span>
+              </button>
+              <button class="format-btn" data-format="weekly">
+                <span class="fmt-icon">📅</span>
+                <span class="fmt-name">Weekly</span>
+              </button>
+              <button class="format-btn" data-format="sprint">
+                <span class="fmt-icon">🚀</span>
+                <span class="fmt-name">Sprint</span>
+              </button>
+            </div>
+          </div>
+
+          <button id="generate-btn" class="generate-btn">
+            <span id="btn-text">Generate Standup</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </section>
+
+        <!-- Right: Output Panel -->
+        <section class="panel panel-output">
+          <div class="panel-header">
+            <h2>Generated Standup</h2>
+            <div class="output-actions">
+              <button id="copy-btn" class="copy-btn hidden">
+                <span id="copy-label">📋 Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="output-area" class="output-area">
+            <div class="empty-state" id="empty-state">
+              <div class="empty-icon">✨</div>
+              <p class="empty-title">Your standup will appear here</p>
+              <p class="empty-sub">Paste your rough notes on the left and hit Generate</p>
+            </div>
+            <pre id="output-text" class="output-text hidden"></pre>
+          </div>
+
+          <div id="status-bar" class="status-bar hidden">
+            <span class="status-dot"></span>
+            <span id="status-msg">Generating...</span>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Turn your rough notes into polished standups instantly ⚡</p>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
