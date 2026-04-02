@@ -5,30 +5,30 @@ const API_BASE = (window.location.hostname === "localhost" || window.location.ho
   : "";
 
 const EXAMPLES = {
-  daily: `worked on PDEV-21730 date filter
-qa deployment failing for PDEV-21725
+  daily: `worked on PREV-xxxx date filter
+qa deployment failing for PREV-xxxx
 added future date validation
-reviewed dan comments
+reviewed teammate comments
 starting new ticket tomorrow`,
 
   blocker: `finished auth refactor PR #342
-blocked on backend API change - waiting for alex
+blocked on backend API change - waiting for teammate
 wrote unit tests for login flow
-design review with sarah went well
+design review with team went well
 need infra team to unblock DB migration before EOD`,
 
-  weekly: `monday - PDEV-21730 date filter implementation
+  weekly: `monday - PREV-xxxx date filter implementation
 tuesday - PR review with team, fixed edge cases
 wednesday - QA testing, found 3 bugs fixed 2
-thursday - PDEV-21725 deployment issues
+thursday - PREV-xxxx deployment issues
 friday - addressed all review comments, merged to main
-next week: starting PDEV-21800 notification system`,
+next week: starting PREV-xxxx notification system`,
 
-  sprint: `PDEV-100 user auth complete
-PDEV-101 dashboard 80% done, blocked on API
-PDEV-102 email notifications done and deployed
-PDEV-103 in progress, needs design sign-off
-PDEV-104 not started, moved to next sprint
+  sprint: `PREV-xxxx user auth complete
+PREV-xxxx dashboard 80% done, blocked on API
+PREV-xxxx email notifications done and deployed
+PREV-xxxx in progress, needs design sign-off
+PREV-xxxx not started, moved to next sprint
 3 bugs fixed, 1 critical still open
 demo ready for friday`,
 };
